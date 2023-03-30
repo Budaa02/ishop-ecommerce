@@ -1,11 +1,23 @@
+import { useContext } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
+
+import { LoginContext } from "../context/login-provider";
 
 export default function SearchBar(props) {
+  // const login = useContext(LoginContext);
+
   const [showWish, setShowWish] = useState(false);
   const [showBasket, setShowBasket] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+
+  const { login, setLogin } = useContext(LoginContext);
+  console.log(login);
+  const signOut = () => {
+    localStorage.removeItem("token");
+    setLogin(false);
+  };
   const notifyBasketRemove = (title) =>
     toast.error(title + "-г сагснаас амжилттай устгалаа.! ", {
       icon: <i class="bi bi-trash3"></i>,
@@ -55,7 +67,10 @@ export default function SearchBar(props) {
         <div className="row xx">
           <div className="logo-container col-4 col-md-3">
             <Link to={"/"}>
-              <img src="image/content/logo1.png" alt="" />
+              <img
+                src="image/content/logo1.png"
+                alt=""
+              />
             </Link>
           </div>
 
@@ -87,7 +102,7 @@ export default function SearchBar(props) {
             <div className="signin">
               <i className="bi bi-person"></i>
               <span className="space"> </span>
-              <Link to={"/signup"}>Sign in</Link>
+              <button onClick={signOut}>{login ? "SignOut" : "SignIn"}</button>
             </div>
             <div className="favorite">
               <i
@@ -144,7 +159,10 @@ export default function SearchBar(props) {
             {props.wishlist.length > 0 ? (
               props.wishlist.map((myWishList, index) => {
                 return (
-                  <div key={index} className="wishlist-product">
+                  <div
+                    key={index}
+                    className="wishlist-product"
+                  >
                     <img
                       src={myWishList.imgUrl[0].original}
                       alt="myWishList.title"
@@ -198,8 +216,14 @@ export default function SearchBar(props) {
               props.basket.map((basket, index) => {
                 return (
                   <div>
-                    <div key={index} className="basket-product">
-                      <img src={basket.imgUrl[0].original} alt="basket.title" />
+                    <div
+                      key={index}
+                      className="basket-product"
+                    >
+                      <img
+                        src={basket.imgUrl[0].original}
+                        alt="basket.title"
+                      />
 
                       <div>
                         <div>{basket.title}</div>
@@ -230,7 +254,10 @@ export default function SearchBar(props) {
               {" "}
               <Link to={"/cart"}>
                 {" "}
-                <button className="btn btn-warning" id="go-to-basket-button">
+                <button
+                  className="btn btn-warning"
+                  id="go-to-basket-button"
+                >
                   Сагсруу үсрэх
                 </button>{" "}
               </Link>{" "}

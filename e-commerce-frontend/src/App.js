@@ -11,13 +11,17 @@ import { useState } from "react";
 import ProductDetails from "./components/ProductDetails";
 import Cart from "./components/Cart";
 import SearchResult from "./components/SearchResult";
+import Login from "./components/Login";
 
 function App() {
   const [wishlist, setWishlist] = useState([]);
   const [basket, setBasket] = useState([]);
   return (
     <div>
-      <div id="product-container" className="container">
+      <div
+        id="product-container"
+        className="container"
+      >
         <CallService />
         <MainMenu />
         <SearchBar
@@ -41,8 +45,18 @@ function App() {
               />
             }
           ></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route path="/search" element={<SearchResult />} />
+          <Route
+            path="/signup"
+            element={<Signup />}
+          ></Route>
+          <Route
+            path="/Login"
+            element={<Login />}
+          ></Route>
+          <Route
+            path="/search"
+            element={<SearchResult />}
+          />
           <Route
             path="/productDetails/:id"
             element={
@@ -56,7 +70,12 @@ function App() {
           ></Route>
           <Route
             path="/cart"
-            element={<Cart basket={basket} setBasket={setBasket} />}
+            element={
+              <Cart
+                basket={basket}
+                setBasket={setBasket}
+              />
+            }
           ></Route>
         </Routes>
       </div>

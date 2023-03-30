@@ -5,8 +5,8 @@ const SubMenu = (props) => {
   const subMenu =
     props.children.length > 0 ? (
       <NavDropdown title={props.title}>
-        {props.children.map((child) => {
-          return <NavDropdown.Item>{child.title}</NavDropdown.Item>;
+        {props.children.map((child, index) => {
+          return <NavDropdown.Item key={index}>{child.title}</NavDropdown.Item>;
         })}
       </NavDropdown>
     ) : (
@@ -15,7 +15,10 @@ const SubMenu = (props) => {
 
   return (
     <div>
-      <Nav className="Navbar ps-5 px-2" id={props.id}>
+      <Nav
+        className="Navbar ps-5 px-2"
+        id={props.id}
+      >
         {subMenu}
       </Nav>
     </div>
